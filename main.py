@@ -33,12 +33,6 @@ class SudokuSolver(Object.Object):
                 row.append(cell)
             self.puzzle.append(row)
 
-    def old_used_in_row(self, row, num):
-        for col in range(9):
-            if self.get_puzzle_value(row, col) == num:
-                return True
-        return False
-
     def used_in_row(self, row, num):
         for col in range(9):
             if self.get_puzzle_value(row, col) == num:
@@ -87,7 +81,7 @@ class SudokuSolver(Object.Object):
         if row == 9 and col == 9:
             return True
 
-        for i in (1, 2, 3, 4, 5, 6, 7, 8, 9):
+        for i in range(1, 10):
             if self.is_safe(row, col, i):
                 self.set_puzzle_value(row, col, i)
                 if self.solve_sudoku():
@@ -129,6 +123,6 @@ if __name__ == '__main__':
 
     solver = SudokuSolver(sys, puzzle)
     solver.solve_sudoku()
-    puzzle = solver.get_puzzle()
     sys.mainloop()
-    print_grid(puzzle)
+    solved = solver.get_puzzle()
+    print_grid(solved)
